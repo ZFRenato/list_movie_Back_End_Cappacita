@@ -4,6 +4,7 @@ const produtionController = require('../../controller/prodution/produtionControl
 
 const produtionRoutes = express.Router()
 
+produtionRoutes.get('/', produtionController.getprodution);
 produtionRoutes.get('/list', produtionController.getProdutionList);
 
 
