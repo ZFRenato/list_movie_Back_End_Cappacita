@@ -29,8 +29,26 @@ async function getProdutionsGen({type, genre}){
     return produtionList;
 }
 
+async function getListProdution(data){
+       
+    const multurl = data.map(prod=>{
+        const url = ({type, id})=>{
+            return apiTmdb.get(`${type}/${id}?api_key=${process.env.API_KEY}&language=pt-BR`)    
+        }
+        return url(prod);
+    });
+    var list = []
+    await axios.all([...multurl]).then(axios.spread((...response)=>{
+        response.map(result=>{  list.push(result.data)})
+    }))
+
+           
+    return list;
+}
+
 
 module.exports = {
     getProdution,
-    getProdutionsGen
+    getProdutionsGen,
+    getListProdution
 }
