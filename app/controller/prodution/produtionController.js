@@ -6,10 +6,11 @@ const produtionDatabase = require('../../model/prodution/produtionDataBase');
 
 const getprodution = async (req, res)=>{
     const data = {
-        type: req.body.type,
-        id: req.body.id
+        type: req.params.type,
+        id: req.params.id
     };
 
+    
     try {
         const result = await tmdb.getProdution({...data});        
         
@@ -31,8 +32,8 @@ const getprodution = async (req, res)=>{
 
 const getProdutionList = async (req, res)=>{
     const data = {
-        type: req.body.type,
-        genre: req.body.genre
+        type: req.params.type,
+        genre: req.params.genre
     }
 
     try {
@@ -114,8 +115,10 @@ const removeProdutionMyList = async (req, res)=>{
 
 const getProdutionMyList = async (req, res)=>{
     const data = {
-        idUser: req.body.idUser
+        idUser: req.params.idUser
     }
+
+    console.log(data)
 
     try {
         const result = await produtionDatabase.selectProdutionMyList({...data});
